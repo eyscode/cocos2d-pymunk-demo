@@ -16,6 +16,7 @@ from controladores import hiscore
 from vistas import escenas
 from vistas.capas import CapaNivelScrolling
 
+
 class TitleLayer(Layer):
     def __init__(self):
         super(TitleLayer, self).__init__()
@@ -37,7 +38,7 @@ class TitleLayer(Layer):
 class ScoresLayer(ColorLayer):
     FONT_SIZE = 22
 
-    is_event_handler = True 
+    is_event_handler = True
 
     def __init__(self):
         w, h = director.get_window_size()
@@ -69,22 +70,22 @@ class ScoresLayer(ColorLayer):
         self.table = []
         for idx, s in enumerate(scores):
             pos = Label('%d:' % (idx + 1), font_name='Edit Undo Line BRK',
-                font_size=self.FONT_SIZE,
-                anchor_y='top',
-                anchor_x='left',
-                color=(255, 255, 255, 255))
+                        font_size=self.FONT_SIZE,
+                        anchor_y='top',
+                        anchor_x='left',
+                        color=(255, 255, 255, 255))
 
             name = Label(s[1], font_name='Edit Undo Line BRK',
-                font_size=self.FONT_SIZE,
-                anchor_y='top',
-                anchor_x='left',
-                color=(255, 255, 255, 255))
+                         font_size=self.FONT_SIZE,
+                         anchor_y='top',
+                         anchor_x='left',
+                         color=(255, 255, 255, 255))
 
             score = Label(str(s[0]), font_name='Edit Undo Line BRK',
-                font_size=self.FONT_SIZE,
-                anchor_y='top',
-                anchor_x='right',
-                color=(255, 255, 255, 255))
+                          font_size=self.FONT_SIZE,
+                          anchor_y='top',
+                          anchor_x='right',
+                          color=(255, 255, 255, 255))
 
             self.table.append((pos, name, score))
 
@@ -202,8 +203,7 @@ class MainMenu(Menu):
         self.menu_anchor_y = CENTER
         self.menu_anchor_x = CENTER
 
-        items = []
-
+        items = list()
         items.append(MenuItem('Nuevo Juego', self.on_new_game))
         items.append(MenuItem('Opciones', self.on_options))
         items.append(MenuItem('Puntajes', self.on_scores))

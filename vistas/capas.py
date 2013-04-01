@@ -1,4 +1,3 @@
-from copy import copy
 import cocos.sprite
 import cocos.layer
 from cocos.actions import *
@@ -12,7 +11,7 @@ from cocos.euclid import Point2
 from modelos import constantes
 from modelos.gameobjects import Palanca
 
-from controladores import  soundex, hiscore
+from controladores import soundex, hiscore
 from controladores.state import state
 
 import random
@@ -20,19 +19,20 @@ import random
 pyglet.resource.path = [constantes.RUTA]
 pyglet.resource.reindex()
 
-class GameOver(cocos.layer.ColorLayer):
-    is_event_handler = True 
 
-    def __init__( self):
+class GameOver(cocos.layer.ColorLayer):
+    is_event_handler = True
+
+    def __init__(self):
         super(GameOver, self).__init__(32, 32, 32, 64)
         w, h = cocos.director.director.get_window_size()
         soundex.play('no.mp3')
         msg = 'GAME OVER'
         label = cocos.text.Label(msg,
-            font_name='Edit Undo Line BRK',
-            font_size=54,
-            anchor_y='center',
-            anchor_x='center')
+                                 font_name='Edit Undo Line BRK',
+                                 font_size=54,
+                                 anchor_y='center',
+                                 anchor_x='center')
         label.position = ( w / 2.0, h / 2.0 )
         self.add(label)
         angle = 5
@@ -48,32 +48,32 @@ class GameOver(cocos.layer.ColorLayer):
             self.hi_score = True
 
             label = cocos.text.Label('Escribe tu nombre:',
-                font_name='Edit Undo Line BRK',
-                font_size=36,
-                anchor_y='center',
-                anchor_x='center',
-                color=(32, 32, 32, 255),
+                                     font_name='Edit Undo Line BRK',
+                                     font_size=36,
+                                     anchor_y='center',
+                                     anchor_x='center',
+                                     color=(32, 32, 32, 255),
             )
             label.position = ( w / 2.0, h / 2.0 )
             label.position = (w // 2, 130)
             self.add(label)
 
             self.name = cocos.text.Label('',
-                font_name='Edit Undo Line BRK',
-                font_size=36,
-                anchor_y='center',
-                anchor_x='center',
-                color=(32, 32, 32, 255),
+                                         font_name='Edit Undo Line BRK',
+                                         font_size=36,
+                                         anchor_y='center',
+                                         anchor_x='center',
+                                         color=(32, 32, 32, 255),
             )
             self.name.position = (w // 2, 80)
             self.add(self.name)
         else:
             self.hi_score = False
             label = cocos.text.Label("Presione 'R' para jugar otra vez",
-                font_name='Edit Undo Line BRK',
-                font_size=18,
-                anchor_y='center',
-                anchor_x='center')
+                                     font_name='Edit Undo Line BRK',
+                                     font_size=18,
+                                     anchor_y='center',
+                                     anchor_x='center')
             label.position = ( w / 2.0, 20 )
             self.add(label)
 
@@ -117,18 +117,18 @@ class ScoreLayer(cocos.layer.Layer):
         self.position = (0, h - 48)
 
         self.score = cocos.text.Label('Puntaje: ', font_size=20,
-            font_name='Edit Undo Line BRK',
-            color=(255, 255, 255, 255),
-            anchor_x='left',
-            anchor_y='bottom')
+                                      font_name='Edit Undo Line BRK',
+                                      color=(255, 255, 255, 255),
+                                      anchor_x='left',
+                                      anchor_y='bottom')
         self.score.position = (50, 0)
         self.add(self.score)
 
         self.metros = cocos.text.Label('Distancia: ', font_size=20,
-            font_name='Edit Undo Line BRK',
-            color=(255, 255, 255, 255),
-            anchor_x='left',
-            anchor_y='bottom')
+                                       font_name='Edit Undo Line BRK',
+                                       color=(255, 255, 255, 255),
+                                       anchor_x='left',
+                                       anchor_y='bottom')
 
         self.metros.position = (480, 0)
         self.add(self.metros)
@@ -144,27 +144,27 @@ class MessageLayer(cocos.layer.Layer):
         w, h = cocos.director.director.get_window_size()
 
         self.msg = cocos.text.Label(msg,
-            font_size=42,
-            font_name='Edit Undo Line BRK',
-            color=(64, 64, 64, 255),
-            anchor_y='center',
-            anchor_x='center')
+                                    font_size=42,
+                                    font_name='Edit Undo Line BRK',
+                                    color=(64, 64, 64, 255),
+                                    anchor_y='center',
+                                    anchor_x='center')
         self.msg.position = (w / 2.0, h)
 
         self.msg2 = cocos.text.Label(msg,
-            font_size=42,
-            font_name='Edit Undo Line BRK',
-            color=(255, 255, 255, 255),
-            anchor_y='center',
-            anchor_x='center')
+                                     font_size=42,
+                                     font_name='Edit Undo Line BRK',
+                                     color=(255, 255, 255, 255),
+                                     anchor_y='center',
+                                     anchor_x='center')
         self.msg2.position = (w / 2.0 + 2, h + 2)
 
         self.add(self.msg, z=1)
         self.add(self.msg2, z=0)
 
-        actions = Accelerate(MoveBy((0, -h / 2.0), duration=0.5)) +\
-                  Delay(1) +\
-                  Accelerate(MoveBy((0, -h / 2.0), duration=0.5)) +\
+        actions = Accelerate(MoveBy((0, -h / 2.0), duration=0.5)) + \
+                  Delay(1) + \
+                  Accelerate(MoveBy((0, -h / 2.0), duration=0.5)) + \
                   Hide()
 
         if callback:
@@ -185,7 +185,7 @@ class HUD(cocos.layer.Layer):
 
 
 class CapaControl(cocos.layer.Layer):
-    is_event_handler = True     
+    is_event_handler = True
 
     def __init__(self, model):
         super(CapaControl, self).__init__()
@@ -219,7 +219,7 @@ class CapaControl(cocos.layer.Layer):
         if not self.model.demo:
             if key == pyglet.window.key.UP:
                 self.model.player.body.velocity.y = min(self.model.player.body.velocity.y,
-                    self.model.player.jump_cutoff_velocity)
+                                                        self.model.player.jump_cutoff_velocity)
                 try:
                     self.on_keys['jumps'].pop()
                     return True
@@ -255,7 +255,6 @@ class CapaNivelScrolling(cocos.layer.Layer):
         self.space = pm.Space()
         self.space.gravity = 0, -900
         self.space.damping = 0.99
-        #self.cargar_mapa(self.mapa)
         self.cargar_mapa_alt()
         self.player.add_to_space(self.space)
         self.schedule(self.update)
@@ -277,7 +276,7 @@ class CapaNivelScrolling(cocos.layer.Layer):
                 for o in self.obstaculos:
                     if isinstance(o, DisparadorPelotas):
                         if arbiter.shapes[0] in (self.player.head, self.player.feet) and arbiter.shapes[1] in [
-                        slot[2] for slot in o.pelotas]:
+                            slot[2] for slot in o.pelotas]:
                             if not self.player.dog:
                                 self.player.matar()
                                 self.parent.get('capa_juego_control').game_over()
@@ -285,7 +284,7 @@ class CapaNivelScrolling(cocos.layer.Layer):
                                 self.player.desmontar()
                                 self.parent.get('hud').show_message("Auuuu!")
                         elif arbiter.shapes[1] in (self.player.head, self.player.feet) and arbiter.shapes[0] in [
-                        slot[2] for slot in o.pelotas]:
+                            slot[2] for slot in o.pelotas]:
                             if not self.player.dog:
                                 self.player.matar()
                                 self.parent.get('capa_juego_control').game_over()
@@ -293,7 +292,7 @@ class CapaNivelScrolling(cocos.layer.Layer):
                                 self.player.desmontar()
                                 self.parent.get('hud').show_message("Auuuu!")
                 if arbiter.shapes[0] in (self.player.head, self.player.feet) and arbiter.shapes[1] in [
-                slot.shape for slot in self.obstaculos]:
+                    slot.shape for slot in self.obstaculos]:
                     for slot in self.obstaculos:
                         if slot.shape == arbiter.shapes[1]:
                             if not self.player.dog:
@@ -304,9 +303,8 @@ class CapaNivelScrolling(cocos.layer.Layer):
                                 self.a_quitar.append(slot)
                                 self.parent.get('hud').show_message("Auuuu!")
                                 break
-                elif arbiter.shapes[1] in (self.player.head, self.player.head2, self.player.feet) and arbiter.shapes[
-                                                                                                      0] in [
-                     slot.shape for slot in self.obstaculos]:
+                elif arbiter.shapes[1] in (self.player.head, self.player.head2, self.player.feet) \
+                    and arbiter.shapes[0] in [slot.shape for slot in self.obstaculos]:
                     for slot in self.obstaculos:
                         if slot.shape == arbiter.shapes[1]:
                             if not self.player.dog:
@@ -340,27 +338,11 @@ class CapaNivelScrolling(cocos.layer.Layer):
                         break
             return False
 
-
         self.space.add_collision_handler(2, 1, begin=muerte)
         self.space.add_collision_handler(2, 3, begin=recoger_bandera)
         self.space.add_collision_handler(1, 3, begin=lambda space, arbiter: False)
         self.space.add_collision_handler(1, 5, begin=lambda space, arbiter: False)
         self.space.add_collision_handler(2, 5, begin=recoger_hueso)
-
-    def cargar_mapa(self, mapa):
-        from os.path import join
-
-        if mapa:
-            nombreFile = join(join(constantes.RUTA, 'mapas'), mapa)
-        else:
-            nombreFile = join(join(constantes.RUTA, 'mapas'), 'mapa.land')
-        fil = open(nombreFile, 'r')
-        static_pisos = eval(fil.read())
-        for static in static_pisos:
-            static.friction = 0.5
-            static.collision_type = 2
-            self.space.add(static)
-        del static_pisos
 
     def cargar_mapa_alt(self):
         lista = []
@@ -476,7 +458,7 @@ class CapaNivelScrolling(cocos.layer.Layer):
         self.agregar_bandera((self.limite + posicion_x, 290))
         self.agregar_bandera((self.limite + posicion_x, 320))
         self.agregar_plataforma_movil((self.limite + posicion_x, 150),
-            [(self.limite + posicion_x, 150), (self.limite + posicion_x, 300)])
+                                      [(self.limite + posicion_x, 150), (self.limite + posicion_x, 300)])
         for i in range(3):
             for j in range(1):
                 self.agregar_bandera((self.limite + 2800 + i * 50, 150 + j * 40))
@@ -489,6 +471,7 @@ class CapaNivelScrolling(cocos.layer.Layer):
         else:
             x = random.randint(3100, 3300)
             self.agregar_disparador_pelotas((self.limite + x, 400))
+
     def agregar_objeto(self, posicion_x, tipo):
         Objeto(posicion_x, tipo).agregar_al_juego(self)
 
@@ -533,7 +516,8 @@ class CapaNivelScrolling(cocos.layer.Layer):
             #self.mundo_post = cocos.sprite.Sprite('fondo3.png')
             self.mundo_post.position = 1800 * (self.mundo.position[0] / 1800 + 2), 200
             self.add(self.mundo_post, z=0)
-            self.player.velocity = self.player.velocity + 3 * (self.player.position[0] / 2000)
+            if not self.demo:
+                self.player.velocity += 3 * (self.player.position[0] / 2000)
             for f in self.player.animations['right_walking'].frames:
                 f.duration /= 1.1
         if self.player.position[0] - self.mundo.position[0] > 2300 and self.mundo_post:

@@ -9,6 +9,7 @@ from os.path import join
 import math
 import random
 
+
 class Player(object):
     def __init__(self, layer_mundo, position=None, direction=constantes.RIGHT):
         self.mundo = layer_mundo
@@ -126,7 +127,7 @@ class Player(object):
         self.body.each_arbiter(f)
         try:
             if self.grounding['body'] is not None and abs(
-                self.grounding['normal'].x / self.grounding['normal'].y) < self.feet.friction:
+                            self.grounding['normal'].x / self.grounding['normal'].y) < self.feet.friction:
                 self.well_grounded = True
                 self.remaining_jumps = 2
             else:
@@ -144,7 +145,7 @@ class Player(object):
             self.update_sprite(constantes.RIGHT, constantes.stoping)
         if self.grounding['body'] is None:
             self.body.velocity.x = cpflerpconst(self.body.velocity.x, self.target_vx + self.ground_velocity.x,
-                self.player_air_accel * dt)
+                                                self.player_air_accel * dt)
             self.well_grounded = False
         self.body.velocity.y = max(self.body.velocity.y, -self.fall_velocity) # clamp upwards as well?
         self.sprite.position = self.body.position

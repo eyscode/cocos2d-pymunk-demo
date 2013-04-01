@@ -2,6 +2,7 @@ import cocos.scene
 from controladores.state import state
 import capas
 
+
 def get_game_scene():
     state.reset()
     s = cocos.scene.Scene()
